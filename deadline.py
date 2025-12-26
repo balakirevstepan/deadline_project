@@ -19,3 +19,14 @@ def deadline_score(pass_date: str, deadline_date: str) -> int:
 
     score = 5 - weeks_late
     return max(0, score)
+
+def late_list(grades: dict, deadline_date: str) -> List[str]:
+    deadline = parse_date(deadline_date)
+    late_students = []
+
+    for student, pass_date in grades.items():
+        submission = parse_date(pass_date)
+        if submission > deadline:
+            late_students.append(student)
+
+    return sorted(late_students)
