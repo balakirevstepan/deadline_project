@@ -30,3 +30,32 @@ def late_list(grades: dict, deadline_date: str) -> List[str]:
             late_students.append(student)
 
     return sorted(late_students)
+
+
+if __name__ == "__main__":
+    print("=== Система оценивания работ ===")
+    print("1 - Рассчитать баллы за работу")
+    print("2 - Список опоздавших студентов")
+
+    choice = input("Выберите режим (1 или 2): ")
+
+    if choice == "1":
+        deadline_date = input("Введите дату дедлайна (DD.MM.YYYY): ")
+        pass_date = input("Введите дату сдачи (DD.MM.YYYY): ")
+        score = deadline_score(pass_date, deadline_date)
+        print(f"Оценка: {score} баллов")
+
+    elif choice == "2":
+        deadline_date = input("Введите дату дедлайна (DD.MM.YYYY): ")
+        n = int(input("Сколько студентов? "))
+        grades = {}
+        for i in range(n):
+            name = input(f"Фамилия студента {i+1}: ")
+            date = input(f"Дата сдачи {name} (DD.MM.YYYY): ")
+            grades[name] = date
+
+        late = late_list(grades, deadline_date)
+        if late:
+            print(f"Опоздавшие: {late}")
+        else:
+            print("Все сдали вовремя!")
